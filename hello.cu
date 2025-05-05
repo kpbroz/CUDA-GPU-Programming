@@ -17,6 +17,10 @@ __global__ void helloGPU()
 
 int main()
 {
+
+  /* Task 1: print the messages from functins helloCPU and helloGPU */
+
+  printf("Task 1:\n");
   helloCPU();
 
 
@@ -33,4 +37,22 @@ int main()
    */
 
   cudaDeviceSynchronize();
+
+  printf("\n");
+
+  /* Task 2: Hello from the GPU prints before Hello from the CPU */
+
+  printf("Task 2:\n");
+  helloGPU<<<1, 1>>>();
+  cudaDeviceSynchronize();
+  helloCPU();
+
+  printf("\n");
+
+  /* Task 3: Hello from the GPU prints twice, once before Hello from the CPU, and once after. */
+
+  helloGPU<<<1, 1>>>();
+  cudaDeviceSynchronize();
+  helloCPU();
+  helloGPU<<<1, 1>>>();
 }
